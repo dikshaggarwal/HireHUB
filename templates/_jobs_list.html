@@ -1,0 +1,36 @@
+<div class="jobs-list">
+    {% if jobs %}
+        {% for job in jobs %}
+        <div class="card mb-3 job-card">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{{ job.company.logo_url }}" alt="{{ job.company.name }}" 
+                         class="company-logo me-3" width="50" height="50">
+                    <div>
+                        <h5 class="card-title mb-0">{{ job.title }}</h5>
+                        <p class="card-subtitle mb-0 text-muted">{{ job.company.name }}</p>
+                    </div>
+                </div>
+                <div class="job-details">
+                    <span class="badge bg-secondary me-2">{{ job.location }}</span>
+                    <span class="badge bg-info me-2">{{ job.job_type }}</span>
+                    <span class="badge bg-success">{{ job.salary_range }}</span>
+                </div>
+                <p class="card-text mt-3">{{ job.description[:200] }}...</p>
+                <a href="{{ url_for('job_detail', job_id=job.id) }}" 
+                   class="btn btn-outline-primary">View Details</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-results">
+            <h3>No jobs found</h3>
+            {% if search_keyword or search_location %}
+                <p>No jobs match your search criteria. Try adjusting your search terms.</p>
+                <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Clear Search</a>
+            {% else %}
+                <p>There are currently no job listings available.</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

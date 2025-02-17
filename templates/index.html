@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="mb-4">
+    <div id="jobCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#jobCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#jobCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#jobCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner rounded">
+            <div class="carousel-item active">
+                <div class="bg-primary bg-gradient p-5 text-center text-white">
+                    <h2>Find Your Dream Job</h2>
+                    <p class="lead">Thousands of jobs from top companies</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="bg-success bg-gradient p-5 text-center text-white">
+                    <h2>Remote Opportunities</h2>
+                    <p class="lead">Work from anywhere in the world</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="bg-info bg-gradient p-5 text-center text-white">
+                    <h2>Tech Jobs</h2>
+                    <p class="lead">Latest opportunities in technology</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#jobCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#jobCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+<section class="search-form">
+    <h2 class="mb-4">Find Your Dream Job</h2>
+    <form action="/search" method="GET">
+        <div class="search-input-group">
+            <div class="flex-grow-1">
+                <input type="text" class="form-control" placeholder="Job title or keyword" name="keyword">
+            </div>
+            <div class="flex-grow-1">
+                <input type="text" class="form-control" placeholder="Location" name="location">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary"><span class="material-symbols-outlined">search</span></button>
+            </div>
+        </div>
+    </form>
+</section>
+
+<div class="container">
+    <div class="jobs-list">
+        {% if jobs %}
+            {% for job in jobs %}
+            <div class="card job-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="{{ job.company.logo_url }}" alt="{{ job.company.name }}" 
+                             class="company-logo me-3" width="50" height="50">
+                        <div>
+                            <h5 class="card-title mb-0">{{ job.title }}</h5>
+                            <p class="card-subtitle mb-0 text-muted">{{ job.company.name }}</p>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="badge bg-secondary me-2">{{ job.location }}</span>
+                        <span class="badge bg-info me-2">{{ job.job_type }}</span>
+                        <span class="badge bg-success">{{ job.salary_range }}</span>
+                    </div>
+                    <p class="card-text mt-3">{{ job.description[:150] }}...</p>
+                    <a href="{{ url_for('job_detail', job_id=job.id) }}" 
+                       class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-results">
+                <h3>No jobs found</h3>
+                {% if search_keyword or search_location %}
+                    <p>No jobs match your search criteria. Try adjusting your search terms.</p>
+                    <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Clear Search</a>
+                {% else %}
+                    <p>There are currently no job listings available.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,214 @@
+/* Custom styles for job portal */
+:root {
+    --custom-spacing: 1.5rem;
+    --card-border-radius: 0.5rem;
+  }
+  
+  /* General Layout */
+  .job-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--custom-spacing);
+  }
+  .jobs-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Creates 2 columns of equal width */
+    gap: 1.5rem; /* Space between grid items */
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  /* Enhanced Job Cards */
+  .job-card {
+    border-radius: var(--card-border-radius);
+    transition: transform 0.2s ease-in-out;
+    margin-bottom: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+  }
+.job-card .card-body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.job-card .card-body a.btn {
+  margin-top: auto;
+}
+
+/* Maintain other existing styles */
+.job-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+  #favicon{
+    border: 1px;
+    border-radius: 50%;
+  }
+  .navbar-brand{
+    border-radius: 2px;
+
+  }
+  .navbar-brand:hover{
+    /* transform: translateY(1px) ;
+    box-shadow: 0 4px 12px #6c5f99; */
+    background-color: #3A4260;
+  }
+  
+  
+  /* Job Title Styling */
+  .job-title {
+    color: var(--bs-primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Company Info */
+  .company-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .company-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--bs-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Job Details */
+  .job-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--bs-gray-600);
+  }
+  
+  /* Tags/Skills */
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .skill-tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    background-color: var(--bs-gray-200);
+    font-size: 0.875rem;
+  }
+  .search-form {
+    background-color: var(--bs-gray-100);
+    padding: 2rem;
+    border-radius: var(--card-border-radius);
+    margin-bottom: 2rem;
+  }
+  
+  /* Search Form */
+  .search-input-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+.search-input-group input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.search-input-group input:focus {
+    border-color: #0d6efd;
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.search-input-group button {
+    padding: 0.75rem 1.5rem;
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 0.375rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.search-input-group button:hover {
+    background-color: #0b5ed7;
+}
+
+.search-input-group button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Add styles for no results state */
+.no-results {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 0.375rem;
+    margin: 2rem 0;
+}
+
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .jobs-list {
+      grid-template-columns: 1fr; /* Switch to single column on mobile */
+    
+    }
+    .search-input-group {
+      flex-direction: column;
+    }
+    
+    .job-details {
+      flex-direction: column;
+    }
+  }
+  
+  .no-results {
+    grid-column: 1 / -1; /* Span all columns */
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 0.375rem;
+    margin: 2rem 0;
+}
+  /* Dark Mode Enhancements */
+  [data-bs-theme=dark] {
+    .job-card {
+      background-color: var(--bs-gray-800);
+      border-color: var(--bs-gray-700);
+    }
+  
+    .skill-tag {
+      background-color: var(--bs-gray-700);
+      color: var(--bs-gray-200);
+    }
+  
+    .search-form {
+      background-color: var(--bs-gray-800);
+    }
+  }
+
+  
