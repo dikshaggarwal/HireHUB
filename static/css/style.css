@@ -45,17 +45,11 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-  #favicon{
-    border: 1px;
-    border-radius: 50%;
-  }
   .navbar-brand{
     border-radius: 2px;
 
   }
   .navbar-brand:hover{
-    /* transform: translateY(1px) ;
-    box-shadow: 0 4px 12px #6c5f99; */
     background-color: #3A4260;
   }
   
@@ -75,15 +69,26 @@
     margin-bottom: 1rem;
   }
   
-  .company-logo {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: var(--bs-gray-200);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  /* For companies grid view */
+.company-grid-logo {
+  height: 200px;
+  object-fit: contain;
+  width: 100%;
+}
+
+/* Keep original small logo style for job listings */
+.company-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Optional: for company profile page */
+.company-profile-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
   
   /* Job Details */
   .job-details {
@@ -160,12 +165,12 @@
     background-color: #6c757d;
     cursor: not-allowed;
 }
-
 /* Add styles for no results state */
 .no-results {
     text-align: center;
     padding: 2rem;
-    background-color: #f8f9fa;
+    color: black;
+    background-color: #2b3245;
     border-radius: 0.375rem;
     margin: 2rem 0;
 }
@@ -190,10 +195,15 @@
     grid-column: 1 / -1; /* Span all columns */
     text-align: center;
     padding: 2rem;
-    background-color: #f8f9fa;
+    color: white;
+    background-color: #2b3245;
     border-radius: 0.375rem;
     margin: 2rem 0;
 }
+  .no-results:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)
+  }
   /* Dark Mode Enhancements */
   [data-bs-theme=dark] {
     .job-card {

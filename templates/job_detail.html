@@ -1,92 +1,166 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="job-detail-page">
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex align-items-center mb-4">
-                <img src="{{ job.company.logo_url }}" alt="{{ job.company.name }}" 
-                     class="company-logo me-3" width="80" height="80">
-                <div>
-                    <h1 class="card-title h2 mb-1">{{ job.title }}</h1>
-                    <a href="{{ url_for('company_profile', company_id=job.company.id) }}" 
-                       class="text-decoration-none">
-                        <h2 class="h5 mb-0">{{ job.company.name }}</h2>
-                    </a>
-                </div>
-            </div>
-
-            <div class="job-meta mb-4">
-                <span class="badge bg-secondary me-2">{{ job.location }}</span>
-                <span class="badge bg-info me-2">{{ job.job_type }}</span>
-                <span class="badge bg-success">{{ job.salary_range }}</span>
-                <span class="badge bg-light text-dark ms-2">
-                    Posted {{ job.posted_date.strftime('%B %d, %Y') }}
-                </span>
-            </div>
-
-            <div class="job-description mb-4">
-                <h3>Job Description</h3>
-                <p>{{ job.description }}</p>
-            </div>
-
-            <div class="job-requirements mb-4">
-                <h3>Requirements</h3>
-                <p>{{ job.requirements }}</p>
-            </div>
-
-            {% if current_user.is_authenticated %}
-                <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#applyModal">
-                    Apply Now
-                </button>
-            {% else %}
-                <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Login to Apply</a>
-            {% endif %}
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-4">
+        <img
+          src="{{ job.company.logo_url }}"
+          alt="{{ job.company.name }}"
+          class="company-logo me-3"
+          width="80"
+          height="80"
+        />
+        <div>
+          <h1 class="card-title h2 mb-1">{{ job.title }}</h1>
+          <a
+            href="{{ url_for('company_profile', company_id=job.company.id) }}"
+            class="text-decoration-none"
+          >
+            <h2 class="h5 mb-0">{{ job.company.name }}</h2>
+          </a>
         </div>
+      </div>
+
+      <div class="job-meta mb-4">
+        <span class="badge bg-secondary me-2">{{ job.location }}</span>
+        <span class="badge bg-info me-2">{{ job.job_type }}</span>
+        <span class="badge bg-success">{{ job.salary_range }}</span>
+        <span class="badge bg-light text-dark ms-2">
+          Posted {{ job.posted_date.strftime('%B %d, %Y') }}
+        </span>
+      </div>
+
+      <div class="job-description mb-4">
+        <h3>Job Description</h3>
+        <p>{{ job.description }}</p>
+      </div>
+
+      <div class="job-requirements mb-4">
+        <h3>Requirements</h3>
+        <p>{{ job.requirements }}</p>
+      </div>
+
+      {% if current_user.is_authenticated %}
+      <button
+        class="btn btn-primary btn-lg"
+        data-bs-toggle="modal"
+        data-bs-target="#applyModal"
+      >
+        Apply Now
+      </button>
+      {% else %}
+      <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg"
+        >Login to Apply</a
+      >
+      {% endif %} {% if current_user.role == 'admin' %}
+      <a
+        href="{{ url_for('update_job', job_id=job.id) }}"
+        class="btn btn-warning"
+        >Edit Job</a
+      >
+      <form
+        action="{{ url_for('delete_job', job_id=job.id) }}"
+        method="POST"
+        style="display: inline"
+      >
+        <button
+          type="submit"
+          class="btn btn-danger"
+          onclick="return confirm('Are you sure you want to delete this job?')"
+        >
+          Delete Job
+        </button>
+      </form>
+      {% endif %}
     </div>
+  </div>
 </div>
 
 <!-- Application Modal -->
-<div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="applyModalLabel">Apply for {{ job.title }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="applicationForm" onsubmit="handleApplicationSubmit(event, {{ job.id }})">
-                    <div class="mb-3">
-                        <label for="coverLetter" class="form-label">Cover Letter</label>
-                        <textarea class="form-control" id="coverLetter" rows="5" required 
-                                placeholder="Tell us why you're interested in this position..."></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="experience" class="form-label">Relevant Experience</label>
-                        <textarea class="form-control" id="experience" rows="3" required
-                                placeholder="Describe your relevant experience..."></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="resumeLink" class="form-label">Resume Link</label>
-                        <input type="url" class="form-control" id="resumeLink" 
-                               placeholder="Link to your resume (Google Drive, Dropbox, etc.)" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="notice" class="form-label">Notice Period</label>
-                        <input type="text" class="form-control" id="notice" 
-                               placeholder="How soon can you join?" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit Application</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+<div
+  class="modal fade"
+  id="applyModal"
+  tabindex="-1"
+  aria-labelledby="applyModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="applyModalLabel">
+          Apply for {{ job.title }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          id="applicationForm"
+          onsubmit="handleApplicationSubmit(event, {{ job.id }})"
+        >
+          <div class="mb-3">
+            <label for="coverLetter" class="form-label">Cover Letter</label>
+            <textarea
+              class="form-control"
+              id="coverLetter"
+              rows="5"
+              required
+              placeholder="Tell us why you're interested in this position..."
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="experience" class="form-label"
+              >Relevant Experience</label
+            >
+            <textarea
+              class="form-control"
+              id="experience"
+              rows="3"
+              required
+              placeholder="Describe your relevant experience..."
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="resumeLink" class="form-label">Resume Link</label>
+            <input
+              type="url"
+              class="form-control"
+              id="resumeLink"
+              placeholder="Link to your resume (Google Drive, Dropbox, etc.)"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="notice" class="form-label">Notice Period</label>
+            <input
+              type="text"
+              class="form-control"
+              id="notice"
+              placeholder="How soon can you join?"
+              required
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Submit Application
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}

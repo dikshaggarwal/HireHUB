@@ -163,6 +163,35 @@ def post_job():
     companies = Company.query.all()
     return render_template('post_job.html', companies=companies)
 
+@app.route('/update-job/<int:job_id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def update_job(job_id):
+    job = Job.query.get_or_404(job_id)
+    if request.method == 'POST':
+        job.title = request.form.get('title')
+        job.description = request.form.get('description')
+        job.location = request.form.get('location')
+        job.salary_range = request.form.get('salary_range')
+        job.job_type = request.form.get('job_type')
+        job.requirements = request.form.get('requirements')
+        db.session.commit()
+        flash('Job updated successfully!', 'success')
+        return redirect(url_for('job_detail', job_id=job.id))
+
+    companies = Company.query.all()
+    return render_template('update_job.html', job=job, companies=companies)
+
+@app.route('/delete-job/<int:job_id>', methods=['POST'])
+@login_required
+@admin_required
+def delete_job(job_id):
+    job = Job.query.get_or_404(job_id)
+    db.session.delete(job)
+    db.session.commit()
+    flash('Job deleted successfully!', 'success')
+    return redirect(url_for('index'))
+
 @app.route('/search')
 def search_jobs():
     keyword = request.args.get('keyword', '').strip()
@@ -198,6 +227,65 @@ def search_jobs():
     return render_template('index.html', jobs=jobs, 
                          search_keyword=keyword.strip('%') if keyword else '',
                          search_location=location.strip('%') if location else '')
+    
+@app.route('/companies')
+@login_required
+@admin_required
+def list_companies():
+    companies = Company.query.all()
+    return render_template('companies.html', companies=companies)
+
+@app.route('/add-company', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_company():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        description = request.form.get('description')
+        logo_url = request.form.get('logo_url')
+
+        # Add to database
+        new_company = Company(
+            name=name,
+            description=description,
+            logo_url=logo_url
+        )
+        db.session.add(new_company)
+        db.session.commit()
+
+        # Update mock_data.py
+        try:
+            with open('mock_data.py', 'r') as file:
+                content = file.read()
+            
+            # Find the COMPANY_DATA list
+            company_data_start = content.find('COMPANY_DATA = [')
+            if company_data_start != -1:
+                # Find the position just before the closing bracket
+                bracket_pos = content.find(']', company_data_start)
+                if bracket_pos != -1:
+                    # Create new company entry
+                    new_entry = f"""    {{"name": "{name}","description": "{description}","logo_url": "{logo_url}"}},\n"""
+                    
+                    # Insert the new entry before the closing bracket
+                    updated_content = (
+                        content[:bracket_pos] + 
+                        new_entry + 
+                        content[bracket_pos:]
+                    )
+                    
+                    with open('mock_data.py', 'w') as file:
+                        file.write(updated_content)
+                        
+            flash('Company added successfully!', 'success')
+            return redirect(url_for('list_companies'))
+            
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error adding company: {str(e)}', 'danger')
+            return redirect(url_for('add_company'))
+
+    return render_template('add_company.html')
 # Add these error handlers after the routes
 @app.errorhandler(403)
 def forbidden_error(error):

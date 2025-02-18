@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Update Job</h1>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Job Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ job.title }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Job Description</label>
+            <textarea class="form-control" id="description" name="description" rows="5" required>{{ job.description }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" name="location" value="{{ job.location }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="salary_range" class="form-label">Salary Range</label>
+            <input type="text" class="form-control" id="salary_range" name="salary_range" value="{{ job.salary_range }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="job_type" class="form-label">Job Type</label>
+            <input type="text" class="form-control" id="job_type" name="job_type" value="{{ job.job_type }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="requirements" class="form-label">Requirements</label>
+            <textarea class="form-control" id="requirements" name="requirements" rows="5" required>{{ job.requirements }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Job</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,47 +1,58 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="dashboard-page">
-    <div class="row mb-4">
-        <div class="col">
-            <h1>Welcome, {{ current_user.name }}!</h1>
-            <p class="text-muted">Manage your job portal activities here</p>
-        </div>
+  <div class="row mb-4">
+    <div class="col">
+      <h1>Welcome, {{ current_user.name }}!</h1>
+      <p class="text-muted">Manage your activities here</p>
     </div>
+  </div>
 
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Profile Overview</h5>
-                    <p class="card-text">
-                        <strong>Email:</strong> {{ current_user.email }}<br>
-                        <strong>Role:</strong> {{ current_user.role.title() }}
-                    </p>
-                    <a href="{{ url_for('profile') }}" class="btn btn-outline-primary">View Profile</a>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Profile Overview</h5>
+          <p class="card-text">
+            <strong>Email:</strong> {{ current_user.email }}<br />
+            <strong>Role:</strong> {{ current_user.role.title() }}
+          </p>
+          <a href="{{ url_for('profile') }}" class="btn btn-outline-primary"
+            >View Profile</a
+          >
         </div>
-        {% if current_user.role == 'admin' %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Admin Controls</h5>
-                    <p class="card-text">Manage job listings and user accounts</p>
-                    <a href="{{ url_for('post_job') }}" class="btn btn-outline-primary">Post New Job</a>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Quick Actions</h5>
-                    <p class="card-text">Common tasks and activities</p>
-                    <a href="/" class="btn btn-outline-primary">Browse Jobs</a>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    {% if current_user.role == 'admin' %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Admin Controls</h5>
+          <p class="card-text">Manage job listings and user accounts</p>
+          <a href="{{ url_for('post_job') }}" class="btn btn-outline-primary"
+            >Post New Job</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Manage Jobs</h5>
+          <p class="card-text">Update or delete existing job listings</p>
+          <a href="{{ url_for('index') }}" class="btn btn-outline-primary">View Jobs</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Manage Companies</h5>
+            <p class="card-text">Add and manage company profiles</p>
+            <a href="{{ url_for('list_companies') }}" class="btn btn-outline-primary">View Companies</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}
