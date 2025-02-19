@@ -1,6 +1,7 @@
 # HireHUB
 <p>HireHUB is a dynamic job portal website built using HTML, CSS, JavaScript, Flask, and SQLite. It aims to connect job seekers with employers efficiently.</p>
 <hr>
+
 ## Features:
 <ul> 
     <li>
@@ -17,6 +18,7 @@
     Fully responsive design for an optimal user experience on all devices.</li>
 </ul>
 <hr>
+
 ## Technologies Used:
 <ul>
     <li>
@@ -35,7 +37,8 @@
     </li>
 </ul>
 <hr>
-##Installation
+
+## Installation
 <ul>
     <li>
     <b>Clone the repository:<b>
@@ -43,9 +46,12 @@
     <li>Create a virtual environment: python -m venv venv venv\Scripts\activate</li>
     <li>Install the dependencies: pip install -r requirements.txt</li>
     <li>Run the application: py app.py</li>
+</ul>
 <hr>
+
 ## Usage
 <p>Open your web browser and navigate to http://127.0.0.1:5000 to access the HireHUB platform.</p>
 <hr>
+
 ## Contributing 
 <p>Contributions are welcome! Please fork this repository and submit a pull request for any new features or bug fixes.</p>
