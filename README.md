@@ -23,7 +23,7 @@
 <ul>
     <li>
     <b>Frontend:</b>
-      <p>HTML<br>CSS<br>JavaScript</p>
+      <br>HTML<br>CSS<br>JavaScript
     </li>
     <li>
     <b>Backend:</b><br>Flask
