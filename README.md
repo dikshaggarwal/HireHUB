@@ -23,17 +23,13 @@
 <ul>
     <li>
     <b>Frontend:</b>
-    HTML
-    CSS
-    JavaScript
+      <p>HTML<br>CSS<br>JavaScript</p>
     </li>
     <li>
-    <b>Backend:</b>
-    Flask
+    <b>Backend:</b><br>Flask
     </li>
     <li>
-    <b>Database:</b>
-    SQLite
+    <b>Database:</b><br>SQLite
     </li>
 </ul>
 <hr>
