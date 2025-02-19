@@ -1,38 +1,51 @@
-HireHUB
-  HireHUB is a dynamic job portal website built using HTML, CSS, JavaScript, Flask, and SQLite. It aims to connect job seekers with employers efficiently.
-
-Features
-  User Authentication: Secure login and registration for both job seekers and employers.
-  Job Posting and Searching: Employers can post jobs, and job seekers can search and apply for them.
-  Profile Management: Both employers and job seekers can manage their profiles.
-  Responsive Design: Fully responsive design for an optimal user experience on all devices.
-
-Technologies Used
-  Frontend:
+# HireHUB
+<p>HireHUB is a dynamic job portal website built using HTML, CSS, JavaScript, Flask, and SQLite. It aims to connect job seekers with employers efficiently.</p>
+<hr>
+## Features:
+<ul> 
+    <li>
+    <b>User Authentication:</b> 
+    Secure login and registration for both job seekers and employers.</li>
+    <li>
+    <b>Job Posting and Searching:</b>
+    Employers can post jobs, and job seekers can search and apply for them.</li>
+    <li>
+    <b>Profile Management:</b>
+    Both employers and job seekers can manage their profiles.</li>
+    <li>
+    <b>Responsive Design:</b> 
+    Fully responsive design for an optimal user experience on all devices.</li>
+</ul>
+<hr>
+## Technologies Used:
+<ul>
+    <li>
+    <b>Frontend:</b>
     HTML
     CSS
     JavaScript
-
-  Backend:
+    </li>
+    <li>
+    <b>Backend:</b>
     Flask
-    
-  Database:
+    </li>
+    <li>
+    <b>Database:</b>
     SQLite
-
-Installation
-1) Clone the repository:
-    git clone https://github.com/yourusername/hirehub.git
-    cd hirehub
-2) Create a virtual environment:
-    python -m venv venv
-    venv\Scripts\activate 
-4) Install the dependencies:
-    pip install -r requirements.txt
-5) Run the application:
-    py app.py
-
-Usage
-  Open your web browser and navigate to http://127.0.0.1:5000 to access the HireHUB platform.
-
-Contributing
-  Contributions are welcome! Please fork this repository and submit a pull request for any new features or bug fixes.
+    </li>
+</ul>
+<hr>
+##Installation
+<ul>
+    <li>
+    <b>Clone the repository:<b>
+    git clone https://github.com/yourusername/hirehub.git cd hirehub
+    <li>Create a virtual environment: python -m venv venv venv\Scripts\activate</li>
+    <li>Install the dependencies: pip install -r requirements.txt</li>
+    <li>Run the application: py app.py</li>
+<hr>
+## Usage
+<p>Open your web browser and navigate to http://127.0.0.1:5000 to access the HireHUB platform.</p>
+<hr>
+## Contributing 
+<p>Contributions are welcome! Please fork this repository and submit a pull request for any new features or bug fixes.</p>
