@@ -38,7 +38,7 @@
 <ul>
     <li>
     <b>Clone the repository:<b>
-    git clone https://github.com/yourusername/hirehub.git cd hirehub
+    git clone https://github.com/dikshaggarwal/hirehub.git cd hirehub
     <li>Create a virtual environment: python -m venv venv venv\Scripts\activate</li>
     <li>Install the dependencies: pip install -r requirements.txt</li>
     <li>Run the application: py app.py</li>
